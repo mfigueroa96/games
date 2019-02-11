@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 
@@ -13,7 +14,10 @@ class MainActivity : AppCompatActivity() {
     var p1 = ArrayList<Int>()
     var p2 = ArrayList<Int>()
     var autoplayer = false
-
+    var scorep1 = 0
+    var scorep2 = 0
+    var scoreA2 = 0
+    var scoreA1 = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             btn.isEnabled = true
         }
     }
+
+
 
     fun autoplayerBtnOnClick (view : View) {
         autoplayer = !autoplayer
@@ -130,7 +136,29 @@ class MainActivity : AppCompatActivity() {
         
         if (win != 0) {
             Toast.makeText(this, "AND the winner IS PLAYER $win", Toast.LENGTH_LONG).show()
-            
+            turnOffButtons()
+            if(win == 1){
+                scorep1++
+            }else
+                scorep2++
+            updateScore()
+        }
+
+    }
+
+    private fun updateScore() {
+        var textViewP1: TextView= findViewById(R.id.scoreP1) as TextView
+        var textViewP2: TextView= findViewById(R.id.scoreP2) as TextView
+        textViewP1.setText("Player 1: $scorep1")
+        textViewP2.setText("Player 2: $scorep2")
+    }
+
+    private fun turnOffButtons() {
+        for (i in 1..9) {
+            var btn = findViewById(resources.getIdentifier("button$i", "id", applicationContext.packageName)) as Button
+            btn.isEnabled = false
+            if(!p1.contains(i) && !p2.contains(i))
+                btn.setBackgroundColor(Color.RED)
         }
     }
 
