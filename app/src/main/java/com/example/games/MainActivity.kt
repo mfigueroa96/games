@@ -109,31 +109,26 @@ class MainActivity : AppCompatActivity() {
         button.isEnabled = false
         p2.add(random)
     }
+
+    fun isWinner(plays: ArrayList<Int>): Boolean{
+        for (i in 1..7 step 3)
+            if(plays.contains(i) && plays.contains(i+1) && plays.contains(i + 2))
+                return true
+        for(i in 1..3)
+            if(plays.contains(i) && plays.contains(i+3) && plays.contains(i + 6))
+                return true
+        if(plays.contains(1) && plays.contains(5) && plays.contains(9) || plays.contains(3) && plays.contains(5) && plays.contains(7))
+            return true
+        return false
+    }
     
     fun andTheWinnerIs() {
         var win = 0
-        if (p1.contains(1) && p1.contains(2) && p1.contains(3)
-            || p1.contains(4) && p1.contains(5) && p1.contains(6)
-            || p1.contains(7) && p1.contains(8) && p1.contains(9)
-            || p1.contains(1) && p1.contains(4) && p1.contains(7)
-            || p1.contains(2) && p1.contains(5) && p1.contains(8)
-            || p1.contains(3) && p1.contains(6) && p1.contains(9)
-            || p1.contains(1) && p1.contains(5) && p1.contains(9)
-            || p1.contains(3) && p1.contains(5) && p1.contains(7)) {
-                win = 1;
-        }
+        if(isWinner(p1))
+            win = 1
+        if(isWinner(p2))
+            win = 2
 
-        if (p2.contains(1) && p2.contains(2) && p2.contains(3)
-            || p2.contains(4) && p2.contains(5) && p2.contains(6)
-            || p2.contains(7) && p2.contains(8) && p2.contains(9)
-            || p2.contains(1) && p2.contains(4) && p2.contains(7)
-            || p2.contains(2) && p2.contains(5) && p2.contains(8)
-            || p2.contains(3) && p2.contains(6) && p2.contains(9)
-            || p2.contains(1) && p2.contains(5) && p2.contains(9)
-            || p2.contains(3) && p2.contains(5) && p2.contains(7)) {
-                win = 2;
-        }
-        
         if (win != 0) {
             Toast.makeText(this, "AND the winner IS PLAYER $win", Toast.LENGTH_LONG).show()
             turnOffButtons()
@@ -160,9 +155,5 @@ class MainActivity : AppCompatActivity() {
             if(!p1.contains(i) && !p2.contains(i))
                 btn.setBackgroundColor(Color.RED)
         }
-    }
-
-    fun findWinner(array: ArrayList<Int>) {
-
     }
 }
