@@ -144,8 +144,8 @@ class MainActivity : AppCompatActivity() {
     private fun updateScore() {
         var textViewP1: TextView= findViewById(R.id.scoreP1) as TextView
         var textViewP2: TextView= findViewById(R.id.scoreP2) as TextView
-        textViewP1.setText("Player 1: $scorep1")
-        textViewP2.setText("Player 2: $scorep2")
+        textViewP1.setText("$scorep1")
+        textViewP2.setText("$scorep2")
     }
 
     private fun turnOffButtons() {
